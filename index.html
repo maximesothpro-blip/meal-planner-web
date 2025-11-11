@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meal Planner - Planning Hebdomadaire</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Section Planning -->
+        <div class="planning-section">
+            <header class="header">
+                <h1><i class="fas fa-utensils"></i> Meal Planner</h1>
+                <div class="week-navigation">
+                    <button id="prevWeek" class="nav-btn">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <span id="currentWeek" class="week-display">Semaine 45 - 2024</span>
+                    <button id="nextWeek" class="nav-btn">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </header>
+
+            <div class="planning-grid" id="planningGrid">
+                <!-- Le planning sera généré dynamiquement ici -->
+            </div>
+
+            <div class="stats-section">
+                <div class="stat-card">
+                    <i class="fas fa-fire"></i>
+                    <div class="stat-info">
+                        <span class="stat-value" id="avgCalories">0</span>
+                        <span class="stat-label">kcal/jour moy.</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-drumstick-bite"></i>
+                    <div class="stat-info">
+                        <span class="stat-value" id="avgProteins">0</span>
+                        <span class="stat-label">g protéines/jour</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-calendar-check"></i>
+                    <div class="stat-info">
+                        <span class="stat-value" id="plannedMeals">0</span>
+                        <span class="stat-label">repas planifiés</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section Chat Telegram -->
+        <div class="chat-section">
+            <div class="chat-header">
+                <i class="fab fa-telegram"></i>
+                <span>Bot Telegram</span>
+                <div class="connection-status" id="connectionStatus">
+                    <span class="status-dot"></span>
+                    <span class="status-text">Connecté</span>
+                </div>
+            </div>
+
+            <div class="chat-messages" id="chatMessages">
+                <div class="message bot">
+                    <div class="message-bubble">
+                        👋 Bonjour ! Je suis votre assistant meal planning. 
+                        <br><br>
+                        Commandes disponibles :
+                        <br>• <strong>recette:</strong> [nom] - Ajouter une recette
+                        <br>• <strong>planning:</strong> - Voir le planning
+                        <br>• <strong>courses:</strong> - Liste de courses
+                    </div>
+                    <span class="message-time">Maintenant</span>
+                </div>
+            </div>
+
+            <div class="chat-input-container">
+                <input 
+                    type="text" 
+                    id="chatInput" 
+                    class="chat-input" 
+                    placeholder="Tapez votre message..."
+                    onkeypress="if(event.key === 'Enter') sendMessage()"
+                >
+                <button class="send-btn" onclick="sendMessage()">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Configuration -->
+    <div id="configModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeConfig()">&times;</span>
+            <h2>Configuration</h2>
+            <div class="config-form">
+                <label>Token Airtable API:</label>
+                <input type="password" id="airtableToken" placeholder="patXXXXXXXXXXXXXX">
+                
+                <label>Chat ID Telegram:</label>
+                <input type="text" id="telegramChatId" placeholder="8195138381">
+                
+                <label>Token Bot Telegram:</label>
+                <input type="password" id="telegramToken" placeholder="8512387536:XXX...">
+                
+                <button onclick="saveConfig()">Sauvegarder</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bouton Configuration -->
+    <button class="config-btn" onclick="openConfig()">
+        <i class="fas fa-cog"></i>
+    </button>
+
+    <script src="app.js"></script>
+</body>
+</html>
