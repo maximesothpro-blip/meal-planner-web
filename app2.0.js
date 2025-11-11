@@ -434,7 +434,7 @@ async function sendToTelegram(message) {
     try {
         // CHANGEMENT ICI : Envoyer au webhook n8n au lieu de Telegram directement
         const response = await fetch(
-            'https://TON-N8N.com/webhook/meal-planner', // 👈 Remplace par ton URL webhook
+            'https://n8n.srv1081620.hstgr.cloud/webhook-test/meal-planner', // 👈 Remplace par ton URL webhook
             {
                 method: 'POST',
                 headers: {
