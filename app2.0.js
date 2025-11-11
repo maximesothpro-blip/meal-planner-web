@@ -424,6 +424,7 @@ function addMessage(text, sender) {
     messagesContainer.scrollTop = messagesContainer.scrollHeight;
 }
 
+
 async function sendToTelegram(message) {
     if (!config.telegram.botToken || !config.telegram.chatId) {
         addBotMessage("⚠️ Configuration Telegram manquante. Veuillez configurer le bot.");
@@ -431,16 +432,17 @@ async function sendToTelegram(message) {
     }
     
     try {
+        // CHANGEMENT ICI : Envoyer au webhook n8n au lieu de Telegram directement
         const response = await fetch(
-            `https://api.telegram.org/bot${config.telegram.botToken}/sendMessage`,
+            'https://TON-N8N.com/webhook/meal-planner', // 👈 Remplace par ton URL webhook
             {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    chat_id: config.telegram.chatId,
-                    text: message
+                    text: message,
+                    chat_id: config.telegram.chatId
                 })
             }
         );
@@ -450,8 +452,8 @@ async function sendToTelegram(message) {
         }
         // La réponse sera récupérée par le polling getUpdates
     } catch (error) {
-        console.error('Erreur Telegram:', error);
-        addBotMessage("❌ Impossible de contacter le bot Telegram.");
+        console.error('Erreur n8n:', error);
+        addBotMessage("❌ Impossible de contacter le serveur.");
     }
 }
 
